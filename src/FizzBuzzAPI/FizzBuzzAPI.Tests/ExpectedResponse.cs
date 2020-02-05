@@ -9,6 +9,8 @@
 
     public class Summary
     {
+        public int Fizz { get; set; }
+
         public int Integer { get; set; }
     }
 }
