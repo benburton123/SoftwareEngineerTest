@@ -1,5 +1,4 @@
-﻿using FizzBuzzAPI.Rules;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -19,6 +18,19 @@ namespace FizzBuzzAPI.Controllers
         [HttpGet("{startIndex}/{finishIndex}")]
         public FizzBuzzResponse Get(int startIndex, int finishIndex)
         {
+            var result = RunRules(startIndex, finishIndex);
+
+            var response = new FizzBuzzResponse
+            {
+                Result = result.TrimEnd(),
+                Summary = _rules.ToDictionary(rule => rule.Name, rule => rule.TotalPasses)
+            };
+
+            return response;
+        }
+
+        private string RunRules(int startIndex, int finishIndex)
+        {
             string result = "";
 
             for (int i = startIndex; i <= finishIndex; i++)
@@ -33,13 +45,7 @@ namespace FizzBuzzAPI.Controllers
                 }
             }
 
-            var response = new FizzBuzzResponse
-            {
-                Result = result.TrimEnd(),
-                Summary = _rules.ToDictionary(rule => rule.Name, rule => rule.TotalPasses)
-            };
-
-            return response;
+            return result;
         }
     }
 }
