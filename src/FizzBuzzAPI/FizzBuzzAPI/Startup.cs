@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FizzBuzzAPI.Rules;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,6 +27,14 @@ namespace FizzBuzzAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddSingleton(new List<IRule>
+            {
+                new FizzBuzzRule(),
+                new FizzRule(),
+                new BuzzRule(),
+                new IntegerRule()
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

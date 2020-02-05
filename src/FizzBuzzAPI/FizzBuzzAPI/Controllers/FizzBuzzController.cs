@@ -9,22 +9,21 @@ namespace FizzBuzzAPI.Controllers
     [Route("[controller]")]
     public class FizzBuzzController : ControllerBase
     {
+        private List<IRule> _rules;
+
+        public FizzBuzzController(List<IRule> rules)
+        {
+            _rules = rules;
+        }
+
         [HttpGet("{startIndex}/{finishIndex}")]
         public FizzBuzzResponse Get(int startIndex, int finishIndex)
         {
             string result = "";
 
-            var rules = new List<IRule>
-            {
-                new FizzBuzzRule(),
-                new FizzRule(),
-                new BuzzRule(),
-                new IntegerRule()
-            };
-
             for (int i = startIndex; i <= finishIndex; i++)
             {
-                foreach (var rule in rules)
+                foreach (var rule in _rules)
                 {
                     if (rule.Run(i))
                     {
@@ -37,7 +36,7 @@ namespace FizzBuzzAPI.Controllers
             var response = new FizzBuzzResponse
             {
                 Result = result.TrimEnd(),
-                Summary = rules.ToDictionary(rule => rule.Name, rule => rule.TotalPasses)
+                Summary = _rules.ToDictionary(rule => rule.Name, rule => rule.TotalPasses)
             };
 
             return response;
