@@ -18,18 +18,15 @@ namespace FizzBuzzAPI.Controllers
 
             for (int i = startIndex; i <= finishIndex; i++)
             {
-                if (i % 3 == 0)
+                if (i % 3 == 0 && i % 5 == 0)
                 {
-                    if (i % 5 == 0)
-                    {
-                        result += $"fizzbuzz ";
-                        fizzBuzzCount++;
-                    }
-                    else
-                    {
-                        result += $"fizz ";
-                        fizzCount++;
-                    }
+                    result += $"fizzbuzz ";
+                    fizzBuzzCount++;
+                }
+                else if (i % 3 == 0)
+                {
+                    result += $"fizz ";
+                    fizzCount++;
                 }
                 else if (i % 5 == 0)
                 {
