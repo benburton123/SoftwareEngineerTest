@@ -1,24 +1,26 @@
-using Microsoft.AspNetCore.Mvc.Testing;
+using Newtonsoft.Json;
 using NUnit.Framework;
-using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace FizzBuzzAPI.Tests
 {
-    public class FizzBuzzAPITests
+    [TestFixture]
+    public class GivenARangeWithANonMultipleOfEither3Or5 : WebApplicationTestBase
     {
-        private HttpClient _httpClient;
+        private ExpectedResponse _expectedResponse;
 
-        [SetUp]
-        public void Setup()
+        [OneTimeSetUp]
+        public async Task WhenTheAPIIsCalledWithRange()
         {
-            _httpClient = new WebApplicationFactory<Startup>().CreateClient();
+            var response = await Client.GetAsync(FizzBuzzRoute);
+
+            _expectedResponse = JsonConvert.DeserializeObject<ExpectedResponse>(await response.Content.ReadAsStringAsync());
         }
 
         [Test]
-        public async Task Test1()
+        public void ThenTheResultIsNumber()
         {
-            await _httpClient.GetAsync("FizzBuzz");
+            Assert.That("2", Is.SameAs(_expectedResponse.Result));
         }
     }
 }
