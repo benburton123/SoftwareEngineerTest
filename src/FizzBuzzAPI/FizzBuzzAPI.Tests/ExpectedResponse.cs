@@ -1,4 +1,6 @@
-﻿namespace FizzBuzzAPI.Tests
+﻿using Newtonsoft.Json;
+
+namespace FizzBuzzAPI.Tests
 {
     public class ExpectedResponse
     {
@@ -9,12 +11,16 @@
 
     public class Summary
     {
+        [JsonProperty("fizz")]
         public int Fizz { get; set; }
 
+        [JsonProperty("buzz")]
         public int Buzz { get; set; }
 
+        [JsonProperty("fizzbuzz")]
         public int FizzBuzz { get; set; }
 
+        [JsonProperty("integer")]
         public int Integer { get; set; }
     }
 }

@@ -13,14 +13,23 @@ namespace FizzBuzzAPI.Controllers
             string result = "";
             int fizzCount = 0;
             int buzzCount = 0;
+            int fizzBuzzCount = 0;
             int integerCount = 0;
 
             for (int i = startIndex; i <= finishIndex; i++)
             {
                 if (i % 3 == 0)
                 {
-                    result += $"fizz ";
-                    fizzCount++;
+                    if (i % 5 == 0)
+                    {
+                        result += $"fizzbuzz ";
+                        fizzBuzzCount++;
+                    }
+                    else
+                    {
+                        result += $"fizz ";
+                        fizzCount++;
+                    }
                 }
                 else if (i % 5 == 0)
                 {
@@ -41,6 +50,7 @@ namespace FizzBuzzAPI.Controllers
                 {
                     { "fizz", fizzCount },
                     { "buzz", buzzCount },
+                    { "fizzbuzz", fizzBuzzCount },
                     { "integer", integerCount }
                 }
             };
