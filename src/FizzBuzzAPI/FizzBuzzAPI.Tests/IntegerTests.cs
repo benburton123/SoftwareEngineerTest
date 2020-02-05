@@ -12,7 +12,7 @@ namespace FizzBuzzAPI.Tests
             private ExpectedResponse _expectedResponse;
 
             [OneTimeSetUp]
-            public async Task WhenTheAPIIsCalledWithRange()
+            public async Task WhenTheAPIIsCalled()
             {
                 var response = await Client.GetAsync($"{FizzBuzzRoute}/2/2");
 
@@ -47,7 +47,7 @@ namespace FizzBuzzAPI.Tests
             }
 
             [OneTimeSetUp]
-            public async Task WhenTheAPIIsCalledWithRange()
+            public async Task WhenTheAPIIsCalled()
             {
                 var response = await Client.GetAsync($"{FizzBuzzRoute}/{_start}/{_end}");
 

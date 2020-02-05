@@ -4,17 +4,17 @@ using System.Threading.Tasks;
 
 namespace FizzBuzzAPI.Tests
 {
-    public class FizzTests
+    public class BuzzTests
     {
         [TestFixture]
-        public class GivenASingleMultipleOf3 : WebApplicationTestBase
+        public class GivenASingleMultipleOf5 : WebApplicationTestBase
         {
             private ExpectedResponse _expectedResponse;
 
             [OneTimeSetUp]
             public async Task WhenTheAPIIsCalled()
             {
-                var response = await Client.GetAsync($"{FizzBuzzRoute}/3/3");
+                var response = await Client.GetAsync($"{FizzBuzzRoute}/10/10");
 
                 _expectedResponse = JsonConvert.DeserializeObject<ExpectedResponse>(await response.Content.ReadAsStringAsync());
             }
@@ -22,13 +22,13 @@ namespace FizzBuzzAPI.Tests
             [Test]
             public void ThenTheResultIsFizz()
             {
-                Assert.That("fizz", Is.EqualTo(_expectedResponse.Result));
+                Assert.That("buzz", Is.EqualTo(_expectedResponse.Result));
             }
 
             [Test]
             public void ThenTheSummaryIsCorrect()
             {
-                Assert.That(1, Is.EqualTo(_expectedResponse.Summary.Fizz));
+                Assert.That(1, Is.EqualTo(_expectedResponse.Summary.Buzz));
             }
         }
     }
