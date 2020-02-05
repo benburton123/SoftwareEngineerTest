@@ -11,11 +11,17 @@ namespace FizzBuzzAPI.Controllers
         public FizzBuzzResponse Get(int startIndex, int finishIndex)
         {
             string result = "";
+            int fizzCount = 0;
             int integerCount = 0;
 
             for (int i = startIndex; i <= finishIndex; i++)
             {
-                if (i % 3 != 0 && i % 5 != 0)
+                if (i % 3 == 0)
+                {
+                    result += $"fizz ";
+                    fizzCount++;
+                }
+                else if (i % 3 != 0 && i % 5 != 0)
                 {
                     result += $"{i} ";
                     integerCount++;
@@ -27,6 +33,7 @@ namespace FizzBuzzAPI.Controllers
                 Result = result.TrimEnd(),
                 Summary = new Dictionary<string, int>
                 {
+                    { "fizz", fizzCount },
                     { "integer", integerCount }
                 }
             };
