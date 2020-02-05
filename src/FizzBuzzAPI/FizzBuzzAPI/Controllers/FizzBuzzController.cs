@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FizzBuzzAPI.Rules;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace FizzBuzzAPI.Controllers
 {
@@ -11,45 +13,31 @@ namespace FizzBuzzAPI.Controllers
         public FizzBuzzResponse Get(int startIndex, int finishIndex)
         {
             string result = "";
-            int fizzCount = 0;
-            int buzzCount = 0;
-            int fizzBuzzCount = 0;
-            int integerCount = 0;
+
+            var rules = new List<IRule>
+            {
+                new FizzBuzzRule(),
+                new FizzRule(),
+                new BuzzRule(),
+                new IntegerRule()
+            };
 
             for (int i = startIndex; i <= finishIndex; i++)
             {
-                if (i % 3 == 0 && i % 5 == 0)
+                foreach (var rule in rules)
                 {
-                    result += $"fizzbuzz ";
-                    fizzBuzzCount++;
-                }
-                else if (i % 3 == 0)
-                {
-                    result += $"fizz ";
-                    fizzCount++;
-                }
-                else if (i % 5 == 0)
-                {
-                    result += $"buzz ";
-                    buzzCount++;
-                }
-                else if (i % 3 != 0 && i % 5 != 0)
-                {
-                    result += $"{i} ";
-                    integerCount++;
+                    if (rule.Run(i))
+                    {
+                        result += $"{rule.Output} ";
+                        break;
+                    }
                 }
             }
 
             var response = new FizzBuzzResponse
             {
                 Result = result.TrimEnd(),
-                Summary = new Dictionary<string, int>
-                {
-                    { "fizz", fizzCount },
-                    { "buzz", buzzCount },
-                    { "fizzbuzz", fizzBuzzCount },
-                    { "integer", integerCount }
-                }
+                Summary = rules.ToDictionary(rule => rule.Name, rule => rule.TotalPasses)
             };
 
             return response;
