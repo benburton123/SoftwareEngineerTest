@@ -13,6 +13,8 @@
 
         public int Buzz { get; set; }
 
+        public int FizzBuzz { get; set; }
+
         public int Integer { get; set; }
     }
 }
