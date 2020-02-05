@@ -8,7 +8,7 @@ namespace FizzBuzzAPI.Controllers
     [Route("[controller]")]
     public class FizzBuzzController : ControllerBase
     {
-        private List<IRule> _rules;
+        private readonly List<IRule> _rules;
 
         public FizzBuzzController(List<IRule> rules)
         {

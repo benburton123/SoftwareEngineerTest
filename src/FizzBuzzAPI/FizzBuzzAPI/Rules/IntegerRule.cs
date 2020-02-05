@@ -9,6 +9,7 @@ namespace FizzBuzzAPI.Rules
         protected override Func<int, bool> Rule { get => (int number) =>
         {
             _number = number.ToString();
+
             return number % 3 != 0 && number % 5 != 0;
         }; }
 
