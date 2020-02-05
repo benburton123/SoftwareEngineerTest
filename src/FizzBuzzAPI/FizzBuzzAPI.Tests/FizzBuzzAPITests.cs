@@ -12,7 +12,7 @@ namespace FizzBuzzAPI.Tests
         [OneTimeSetUp]
         public async Task WhenTheAPIIsCalledWithRange()
         {
-            var response = await Client.GetAsync($"{FizzBuzzRoute}/1/1");
+            var response = await Client.GetAsync($"{FizzBuzzRoute}/2/2");
 
             _expectedResponse = JsonConvert.DeserializeObject<ExpectedResponse>(await response.Content.ReadAsStringAsync());
         }
