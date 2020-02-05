@@ -12,7 +12,7 @@ namespace FizzBuzzAPI.Tests
         [OneTimeSetUp]
         public async Task WhenTheAPIIsCalledWithRange()
         {
-            var response = await Client.GetAsync(FizzBuzzRoute);
+            var response = await Client.GetAsync($"{FizzBuzzRoute}/1/1");
 
             _expectedResponse = JsonConvert.DeserializeObject<ExpectedResponse>(await response.Content.ReadAsStringAsync());
         }
@@ -20,7 +20,7 @@ namespace FizzBuzzAPI.Tests
         [Test]
         public void ThenTheResultIsNumber()
         {
-            Assert.That("2", Is.SameAs(_expectedResponse.Result));
+            Assert.That("2", Is.EqualTo(_expectedResponse.Result));
         }
     }
 }

@@ -6,10 +6,13 @@ namespace FizzBuzzAPI.Controllers
     [Route("[controller]")]
     public class FizzBuzzController : ControllerBase
     {
-        [HttpGet]
-        public string Get()
+        [HttpGet("{startIndex}/{finishIndex}")]
+        public FizzBuzzResponse Get(int startIndex, int finishIndex)
         {
-            return null;
+            return new FizzBuzzResponse
+            {
+                Result = "2"
+            };
         }
     }
 }
