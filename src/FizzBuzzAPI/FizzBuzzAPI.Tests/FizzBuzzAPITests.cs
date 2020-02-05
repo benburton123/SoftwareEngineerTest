@@ -22,6 +22,12 @@ namespace FizzBuzzAPI.Tests
         {
             Assert.That("2", Is.EqualTo(_expectedResponse.Result));
         }
+
+        [Test]
+        public void ThenTheSummaryIsCorrect()
+        {
+            Assert.That(1, Is.EqualTo(_expectedResponse.Summary.Integer));
+        }
     }
 
     [TestFixture]
@@ -41,6 +47,12 @@ namespace FizzBuzzAPI.Tests
         public void ThenTheResultIsNumber()
         {
             Assert.That("1 2", Is.EqualTo(_expectedResponse.Result));
+        }
+
+        [Test]
+        public void ThenTheSummaryIsCorrect()
+        {
+            Assert.That(2, Is.EqualTo(_expectedResponse.Summary.Integer));
         }
     }
 }
