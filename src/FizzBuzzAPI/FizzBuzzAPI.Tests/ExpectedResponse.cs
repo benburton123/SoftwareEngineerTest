@@ -9,6 +9,6 @@
 
     public class Summary
     {
-        public string Integer { get; set; }
+        public int Integer { get; set; }
     }
 }

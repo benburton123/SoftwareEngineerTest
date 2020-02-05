@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace FizzBuzzAPI.Controllers
 {
@@ -10,16 +11,27 @@ namespace FizzBuzzAPI.Controllers
         public FizzBuzzResponse Get(int startIndex, int finishIndex)
         {
             string result = "";
+            int integerCount = 0;
 
             for (int i = startIndex; i <= finishIndex; i++)
             {
-                if (i % 3 != 0 && i % 5 != 0) result += $"{i} ";
+                if (i % 3 != 0 && i % 5 != 0)
+                {
+                    result += $"{i} ";
+                    integerCount++;
+                }
             }
 
-            return new FizzBuzzResponse
+            var response = new FizzBuzzResponse
             {
-                Result = result.TrimEnd()
+                Result = result.TrimEnd(),
+                Summary = new Dictionary<string, int>
+                {
+                    { "integer", integerCount }
+                }
             };
+
+            return response;
         }
     }
 }
